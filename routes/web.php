@@ -39,13 +39,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::middleware(['auth', 'role:employee'])->group(function () {
 
     Route::get('/employee-leave-requests', [LeaveRequestController::class, 'employee'])->name('requests.employee');
-
     Route::get('/leave-requests/create', [LeaveRequestController::class, 'create'])->name('requests.create');
-
     Route::post('/leave-requests', [LeaveRequestController::class, 'store'])->name('requests.store');
-
     Route::get('/leave-requests/{leave_request}', [LeaveRequestController::class, 'show'])->name('requests.show');
-
     Route::delete('/leave-requests/{leave_request}', [LeaveRequestController::class, 'destroy'])->name('requests.destroy');
 });
 

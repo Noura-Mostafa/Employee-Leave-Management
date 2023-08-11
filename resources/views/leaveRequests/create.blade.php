@@ -2,15 +2,15 @@
 
     <div class="container p-5 mt-5 bg-white">
 
-    @if($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
         <form action="{{route('requests.store')}}" method="post">
             @csrf
@@ -24,7 +24,7 @@
                 {{--<select name="employee_id" class="w-100">
                     @foreach($employees as $employee)
                     <option value="{{$employee->id}}">{{$employee->name}}</option>
-                    @endforeach
+                @endforeach
                 </select>--}}
 
             </div>
