@@ -7,7 +7,7 @@
         </div>
 
         <div class="bg-white p-4 mt-3">
-            <h2 class="fs-2">Your Leave request Status</h2>
+            <h2 class="fs-2">Your Leave requests Status</h2>
             @forelse($leave_requests as $request)
             <div class="type mt-3 d-flex justify-content-between">
                 <div class="">
