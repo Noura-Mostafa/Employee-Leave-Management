@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Employee;
 use App\Models\LeaveType;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\EmployeeRequest;
+use Illuminate\Validation\Rules;
+
 
 class EmployeeController extends Controller
 {
@@ -16,7 +17,7 @@ class EmployeeController extends Controller
     {
         $leave_types = LeaveType::where('user_id', Auth::id())->get();
 
-        $employees = Employee::where('user_id', Auth::id())->get();
+        $employees = User::where('role', 'employee')->get();
 
         return view(
             'employee.index',
@@ -34,49 +35,59 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:employees,email',
-            'age' => 'int|required',
-            'salary' => 'nullable',
-            'phone' => 'required',
-            'position' => 'required|string',
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
+            'password' => ['required', Rules\Password::defaults()],
+            'phone' =>['required' , 'string'],
+            'age' => ['int','required'],
+            'position' => ['required','string'],
         ]);
 
-        Auth::user()->employees()->create($validated);
-
-
-        return redirect()->route('employees.index');
-    }
-
-    public function show(Employee $employee)
-    {
-
-        return view('employee.show', [
-            'employee' => $employee,
+        $employees = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'role' => 'employee',
+            'password' => Hash::make($request->password),
+            'age' => $request->age,
+            'position' => $request->position
         ]);
+
+
+        return redirect()->route('employees.index')
+            ->with(['employees' => $employees]);
     }
 
-    public function edit(Employee $employee)
+    public function show(User $employee)
+    {        
+        return view('employee.show', compact('employee'));
+    }
+
+    public function edit(User $employee)
+    {
+        return view('employee.edit', compact('employee'));
+    }
+
+    public function update(Request $request, User $employee)
     {
 
-        return view('employee.edit', [
-            'employee' => $employee,
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' =>['required' , 'string'],
+            'age' => ['int','required'],
+            'position' => ['required','string'],
         ]);
-    }
-
-    public function update(Request $request, Employee $employee)
-    {
 
         $employee->update($request->all());
 
         return redirect()->route('employees.index')
             ->with([
-                'employee' => $employee
+                'user' => $employee
             ]);
     }
 
-    public function destroy(Employee $employee)
+    public function destroy(User $employee)
     {
 
         $employee->delete();

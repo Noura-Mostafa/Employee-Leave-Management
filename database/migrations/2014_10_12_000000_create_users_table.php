@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->enum('role' , ['admin' , 'employee'])->default('admin');
+            $table->string('age')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('position')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -31,3 +34,4 @@ return new class extends Migration
         Schema::dropIfExists('users');
     }
 };
+

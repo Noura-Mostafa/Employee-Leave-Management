@@ -10,8 +10,9 @@
                 <div class="">
                     <h4 class="fs-4">{{$leave_request->employee_name}} has request to leave</h4>
                     <h6 class="fs-6 mt-3">Leave Reason :{{$leave_request->reason}}</h6>
-                    <h6 class="fs-6 mt-3">Leave Type :{{$leave_request->leaveType->leave_type}}</h6>
-                    <h6 class="fs-6 mt-3">Status :{{$leave_request->status}}</h6>
+                    <h6 class="fs-6 mt-3">Leave Type :{{$leave_request->leaveType->leave_type ?? ''}}</h6>
+                    <h6 class="fs-6 mt-3">Start Date :{{$leave_request->start_date}}</h6>
+                    <h6 class="fs-6 mt-3">Duration :{{$leave_request->duration}}</h6>
                 </div>
                 <div class="mt-4">
                     <form action="{{route('requests.approve' , $leave_request->id)}}" method="post">

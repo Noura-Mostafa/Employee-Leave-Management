@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('employee_name');
             $table->enum('status' , ['accepted' , 'rejected' , 'pending'])->default('pending');
             $table->string('reason');
+            $table->date('start_date')->nullable();
+            $table->integer('duration')->nullable();
             $table->string('reject_reason')->nullable();
             $table->timestamps();
         });

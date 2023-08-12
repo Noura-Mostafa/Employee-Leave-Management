@@ -5,9 +5,6 @@ use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\Role;
-
-
 
 Route::get('/', function () {
     return view('welcome');

@@ -21,7 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'phone',
+        'role',
+        'age',
+        'position'
     ];
 
     /**
@@ -43,11 +46,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function employees()
-    {
-        return $this->hasMany(Employee::class, 'user_id');
-    }
 
     public function leaveTypes()
     {

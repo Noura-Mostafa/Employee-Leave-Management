@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
 use App\Models\LeaveType;
 use App\Models\LeaveRequest;
 use Illuminate\Http\Request;
@@ -44,6 +43,8 @@ class LeaveRequestController extends Controller
             'leave_type_id' => 'required|exists:leave_types,id',
             'employee_name' => 'required|string',
             'reason' => 'string',
+            'start_date' => 'date',
+            'duration' => 'int|required',
         ]);
 
         $validated['user_id'] = Auth::user()->id;

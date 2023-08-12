@@ -35,6 +35,12 @@ class LeaveTypeController extends Controller
 
     public function update(Request $request, LeaveType $leave_type)
     {
+        $request->validate([
+            'leave_type' => 'required|string|unique:leave_types,leave_type',
+            'description' => 'nullable|string',
+        ]);
+
+        
         $leave_type->update($request->all());
 
         return redirect()->route('employees.index')

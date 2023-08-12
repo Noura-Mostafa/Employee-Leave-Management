@@ -14,7 +14,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">phone</th>
+                    <th scope="col">age</th>
                     <th scope="col">position</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -25,7 +25,7 @@
                     <th scope="row">{{$employee->id}}</th>
                     <td>{{$employee->name}}</td>
                     <td>{{$employee->email}}</td>
-                    <td>{{$employee->phone}}</td>
+                    <td>{{$employee->age}}</td>
                     <td>{{$employee->position}}</td>
                     <td class="d-flex">
                         <a href="{{route('employees.show' , $employee->id)}}" class="btn btn-primary btn-sm me-1">show</a>

@@ -5,6 +5,8 @@
         <div class="mt-3 bg-white p-3">
             <h5 class="fs-5 mt-2">Reason : {{$leave_request->reason}}</h5>
             <h5 class="fs-5 mt-2">Status : {{$leave_request->status}}</h5>
+            <h5 class="fs-5 mt-2">Start Date : {{$leave_request->start_date}}</h5>
+            <h5 class="fs-5 mt-2">Duration : {{$leave_request->duration}}</h5>
         </div>
 
         <div class="mt-3 bg-white p-3">
@@ -16,8 +18,6 @@
             @method('delete')
             <x-danger-button type="submit">Delete</x-danger-button>
         </form>
-    </div>
-
     </div>
 
 </x-app-layout>
