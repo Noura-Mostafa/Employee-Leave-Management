@@ -1,6 +1,6 @@
-<x-app-layout>
+<x-main-layout>
 
-    <div class="container p-5 m-auto w-50 mt-5 bg-white">
+    <div class="container pt-5 m-auto w-50 border">
 
         <h1 class="text-center fs-1 mb-3">
             {{$employee->name}} Details :
@@ -12,4 +12,4 @@
         <h5 class="fs-5 mb-2">age : {{$employee->age}}</h5>
     </div>
 
-</x-app-layout>
+</x-main-layout>

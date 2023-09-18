@@ -1,6 +1,6 @@
-<x-app-layout>
+<x-main-layout>
 
-    <div class="container p-5 mt-5 bg-white">
+    <div class="container pt-5">
 
         <h2 class="fs-2">Leave Requests</h2>
 
@@ -18,14 +18,14 @@
                     <form action="{{route('requests.approve' , $leave_request->id)}}" method="post">
                         @csrf
                         @method('put')
-                        <x-primary-button type="submit">Accept</x-primary-button>
+                        <button type="submit" class="btn btn-primary">Accept</button>
                     </form>
                     <form action="{{route('requests.deny' , $leave_request->id)}}" method="post" class="">
                         @csrf
                         @method('patch')
-                        <x-input-label class="mb-1 fs-6" for="reject_reason" class="mt-2">Write Reject Reason:</x-input-label>
-                        <x-text-input type="text" name="reject_reason" id="reject_reason" />
-                        <x-danger-button type="submit">Deny</x-danger-button>
+                        <input type="text" name="reject_reason" id="reject_reason" class="form-control"/>
+                        <label class="mb-1 fs-6" for="reject_reason" class="mt-2">Write Reject Reason:</label>
+                        <button type="submit" class="btn btn-danger">Deny</button>
                     </form>
                 </div>
             </div>
@@ -37,4 +37,4 @@
 
     </div>
 
-</x-app-layout>
+</x-main-layout>

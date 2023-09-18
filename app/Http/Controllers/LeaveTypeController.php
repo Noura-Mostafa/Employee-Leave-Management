@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class LeaveTypeController extends Controller
 {
+    public function index()
+    {
+        $leave_types = LeaveType::where('user_id', Auth::id())->get();
+
+        return view('leaveTypes.index' , [
+            'leave_types' => $leave_types
+        ]);
+    }
+
     public function create()
     {
         return view('leaveTypes.create');

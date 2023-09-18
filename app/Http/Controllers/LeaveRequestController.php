@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\RequestCreated;
+use App\Events\RequestResponse;
 use App\Models\LeaveType;
 use App\Models\LeaveRequest;
 use Illuminate\Http\Request;
@@ -11,9 +13,9 @@ class LeaveRequestController extends Controller
 {
     public function employee()
     {
-        $leave_requests = LeaveRequest::where('user_id' , Auth::id())->get();
+        $leave_requests = LeaveRequest::where('user_id', Auth::id())->get();
 
-        return view('leaveRequests.employee' , [
+        return view('leaveRequests.employee', [
             'leave_requests' => $leave_requests,
         ]);
     }
@@ -22,7 +24,7 @@ class LeaveRequestController extends Controller
     {
         $leave_requests = LeaveRequest::all();
 
-        return view('leaveRequests.index' , [
+        return view('leaveRequests.index', [
             'leave_requests' => $leave_requests,
         ]);
     }
@@ -36,10 +38,10 @@ class LeaveRequestController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request, LeaveRequest $leaveRequest)
     {
 
-        $validated= $request->validate([
+        $validated = $request->validate([
             'leave_type_id' => 'required|exists:leave_types,id',
             'employee_name' => 'required|string',
             'reason' => 'string',
@@ -51,6 +53,7 @@ class LeaveRequestController extends Controller
 
         LeaveRequest::create($validated);
 
+        event(new RequestCreated($leaveRequest));
 
         return redirect()->route('requests.employee');
     }
@@ -66,23 +69,28 @@ class LeaveRequestController extends Controller
     }
 
 
-    public function approve(LeaveRequest $leave_request)
+    public function approve(LeaveRequest $leaveRequest)
     {
-        $leave_request->update([
+        $leaveRequest->update([
             'status' => 'accepted',
             'reject_reason' => null,
         ]);
+
+        event(new RequestResponse($leaveRequest));
 
         return redirect()->route('requests.index');
     }
 
 
-    public function deny(LeaveRequest $leave_request ,Request $request)
+    public function deny(Request $request , LeaveRequest $leaveRequest)
     {
-        $leave_request->update([
+        $leaveRequest->update([
             'status' => 'rejected',
             'reject_reason' => $request->input('reject_reason'),
-            ]);
+        ]);
+
+        event(new RequestResponse($leaveRequest));
+
 
         return redirect()->route('requests.index');
     }

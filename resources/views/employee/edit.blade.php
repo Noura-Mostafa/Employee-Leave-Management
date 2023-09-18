@@ -1,44 +1,43 @@
-<x-app-layout>
+<x-main-layout>
 
-    <div class="container p-5 mt-5 bg-white w-50 m-auto">
+    <div class="container pt-5">
+
+    <h2 class="mb-5 fs-2">Edit Employee</h2>
 
         <form action="{{route('employees.update' , $employee->id)}}" method="post">
             @csrf
             @method('put')
 
-            <h2 class="mb-3 fs-2 text-center">Edit {{$employee->name}}</h2>
-
-
-            <div class="form-input mb-2">
-                <x-input-label class="mb-1 fs-6" for="name">Name :</x-input-label>
-                <x-text-input class="w-100"  type="text" name="name" id="name" value="{{$employee->name}}" />
+            <div class="form-floating mb-3">
+                <input class="form-control w-50"  type="text" name="name" id="name" value="{{$employee->name}}" />
+                <label class="mb-1 fs-6" for="name">Name :</label>
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
 
-            <div class="form-input mb-2">
-                <x-input-label class="mb-1 fs-6" for="position">Position :</x-input-label>
-                <x-text-input class="w-100" type="text" name="position" id="position" value="{{$employee->position}}" />
+            <div class="form-floating mb-3">
+                <input class="form-control w-50" type="text" name="position" id="position" value="{{$employee->position}}" />
+                <label class="mb-1 fs-6" for="position">Position :</label>
                 <x-input-error :messages="$errors->get('position')" class="mt-2" />
             </div>
 
-            <div class="form-input mb-2">
-                <x-input-label class="mb-1 fs-6" for="age">Age :</x-input-label>
-                <x-text-input class="w-100" type="number" name="age" id="age" value="{{$employee->age}}" />
+            <div class="form-floating mb-3">
+                <input class="form-control w-50" type="number" name="age" id="age" value="{{$employee->age}}" />
+                <label class="mb-1 fs-6" for="age">Age :</label>
                 <x-input-error :messages="$errors->get('age')" class="mt-2" />
             </div>
 
-            <div class="form-input mb-2">
-                <x-input-label class="mb-1 fs-6" for="phone">Phone :</x-input-label>
-                <x-text-input class="w-100" type="text" name="phone" id="phone" value="{{$employee->phone}}" />
+            <div class="form-floating mb-3">
+                <input class="form-control w-50" type="text" name="phone" id="phone" value="{{$employee->phone}}" />
+                <label class="mb-1 fs-6" for="phone">Phone :</label>
                 <x-input-error :messages="$errors->get('phone')" class="mt-2" />
             </div>
 
 
-            <x-primary-button type="submit" class="mt-2">Update Employee</x-primary-button>
+            <button type="submit" class="btn btn-primary mt-3">Update Employee</button>
 
         </form>
 
 
     </div>
 
-</x-app-layout>
+</x-main-layout>

@@ -23,7 +23,6 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resources([
-
         '/employees' => EmployeeController::class,
         '/leave-types' => LeaveTypeController::class,
     ]);
