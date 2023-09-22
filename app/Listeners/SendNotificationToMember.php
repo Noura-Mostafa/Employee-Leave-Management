@@ -23,10 +23,10 @@ class SendNotificationToMember
      */
     public function handle(RequestResponse $event): void
     {
-        $members = $event->leaveRequest->user()->where('role' , 'member')->get();
+        $employees = $event->leaveRequest->user()->where('role' , 'employee')->get();
 
-        foreach ($members as $member) {
-            $member->notify(new RequestResponseNotification($event->leaveRequest));
+        foreach ($employees as $employee) {
+            $employee->notify(new RequestResponseNotification($event->leaveRequest));
         }
     }
 }
